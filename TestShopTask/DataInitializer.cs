@@ -7,7 +7,7 @@ using TestShopTask.Models;
 
 namespace TestShopTask
 {
-    public class DataInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<ShopContext>
+    public class DataInitializer : System.Data.Entity.DropCreateDatabaseAlways<ShopContext>
     {
         protected override void Seed(ShopContext context)
         {

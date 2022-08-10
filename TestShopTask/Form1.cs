@@ -8,20 +8,32 @@ namespace TestShopTask
     {
 
         private ShopContext context;
-        public Form1()
+        public Form1(bool initialize)
         {
             InitializeComponent();
+            try
+            {
+                string connectionString = initialize ?
+                    "data source=.\\SQLEXPRESS;initial catalog=Shop1;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework" :
+                    "data source=.\\SQLEXPRESS;initial catalog=Shop;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework";
 
-            Database.SetInitializer(new DataInitializer());
-            context = new ShopContext();
+                context = new ShopContext(connectionString);
+                if (initialize)
+                {
+                    Database.SetInitializer(new DataInitializer());
+                    context.Database.Initialize(false);
+                }
 
-            context.Database.Initialize(false);
+                context.GiftCards.Load();
+                context.GiftCardItems.Load();
+                context.Products.Load();
+                context.ProductsInShop.Load();
+                context.Shops.Load();
+            } catch (Exception ex)
+            {
+                var result = MessageBox.Show("Ошибка: " + ex.Message);
+            }
 
-            context.GiftCards.Load();
-            context.GiftCardItems.Load();
-            context.Products.Load();
-            context.ProductsInShop.Load();
-            context.Shops.Load();
         }
 
         private void GiftCardsBtn_Click(object sender, EventArgs e)

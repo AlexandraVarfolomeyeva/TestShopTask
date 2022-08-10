@@ -9,8 +9,8 @@ namespace TestShopTask.Models
 {
     public class ShopContext : DbContext
     {
-        public ShopContext()
-    : base("data source=.\\SQLEXPRESS;initial catalog=Shop;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework")
+        public ShopContext(string connectionString)
+    : base(connectionString)
         {
         }
 
