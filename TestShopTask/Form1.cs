@@ -8,20 +8,13 @@ namespace TestShopTask
     {
 
         private ShopContext context;
-        string ServerStr = ".\\SQLEXPRESS", DatabaseStr = "Shop", 
-            UserName= "User1",UserPassword= "123";
 
-        public Form1(bool initialize)
+        public Form1(bool initialize, string connectionString)
         {
             InitializeComponent();
             try
             {
-                // User Id={2};Password={3}; если БД предусматривает ввод пароля
-                string connectionString = initialize ?
-                    string.Format("Server={0};Database=Shop1;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework", 
-                    ServerStr, DatabaseStr):
-                    string.Format("Server={0};Database={1};integrated security=True;MultipleActiveResultSets=True;App=EntityFramework", 
-                    ServerStr, DatabaseStr);
+
 
                 context = new ShopContext(connectionString);
                 if (initialize)
